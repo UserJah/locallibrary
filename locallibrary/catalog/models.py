@@ -33,8 +33,8 @@ class Book(models.Model):
 
     # ManyToManyField используется, потому что жанр может содержать много книг. Книги могут охватывать многие жанры.
 
-    def __str__(self):
-        return self.title
+
+
 
     def get_absolute_url(self):
         '''
