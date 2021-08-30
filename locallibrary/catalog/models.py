@@ -33,14 +33,19 @@ class Book(models.Model):
 
     # ManyToManyField используется, потому что жанр может содержать много книг. Книги могут охватывать многие жанры.
 
-
-
-
     def get_absolute_url(self):
         '''
         Возвращает URL-адресс для доступа к конкретному экземпляру книги
         '''
         return reverse('book-detail', args=[str(self.id)])
+
+    def display_genre(self):
+        '''
+        Создает строку для жанра. Это необходимо для отображения жанра в админке
+        '''
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
 
 
 class BookInstance(models.Model):
@@ -94,7 +99,5 @@ class Language(models.Model):
     """
     name = models.CharField(max_length=100, help_text='Введите язык на котором написана книга')
 
-
     def __str__(self):
         return self.name
-
